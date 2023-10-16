@@ -15,5 +15,8 @@ public func configure(_ app: Application) async throws {
     for router in routers {
         try router.boot(routes: app.routes)
     }
-//    try routes(app)
+    let modules: [Module] = [FrontendModule(), BlogModule()]
+    for module in modules {
+        try module.configure(app)
+    }
 }
