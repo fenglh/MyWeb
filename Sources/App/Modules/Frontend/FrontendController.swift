@@ -5,19 +5,25 @@
 //  Created by fenglh on 2023/10/11.
 //
 
+import Foundation
 import Vapor
-struct FrontendController {
 
-     func homeView(req: Request) throws -> EventLoopFuture<View> {
+struct FrontendController {
+    func homeView(req: Request) throws -> EventLoopFuture<View> {
+        var email: String?
+        if let user = req.auth.get(UserModel.self) {
+            email = user.email
+        }
+
         struct Context: Encodable {
             let title: String
             let header: String
             let message: String
+            let email: String?
         }
 
-        let context = Context(title: "三角's Blog - 首页",
-        header: "大家好,",
-        message: "欢迎大家访问我的博客!")
+        let context = Context(title: "myPage - Home", header: "Hi there,", message: "welcome to my awesome page!", email: email)
         return req.view.render("home", context)
     }
+    //...
 }

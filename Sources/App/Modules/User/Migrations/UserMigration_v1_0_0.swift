@@ -13,6 +13,7 @@ struct UserMigration_v1_0_0: Migration {
         [
             UserModel(email: "mail.tib@gmail.com", password: try! Bcrypt.hash("ChangeMe1")),
             UserModel(email: "zhangsan@gmail.com", password: try! Bcrypt.hash("ChangeMe2")),
+            UserModel(email: "fenglh@gmail.com", password: try! Bcrypt.hash("123456")),
         ]
     }
     func prepare(on db: Database) -> EventLoopFuture<Void> {
