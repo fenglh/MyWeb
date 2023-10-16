@@ -1,0 +1,34 @@
+//
+//  File.swift
+//  
+//
+//  Created by fenglh on 2023/10/16.
+//
+
+import Vapor
+import Fluent
+struct UserFrontendController {
+
+    func loginView(req: Request) throws -> EventLoopFuture<View> {
+        struct Context: Encodable {
+            let title: String
+        }
+
+        let context = Context(title: "Char's Blog - Sign in")
+        return req.view.render("login", context)
+    }
+    
+    func login(req: Request) throws -> Response {
+        guard let user = req.auth.get(UserModel.self) else {
+            throw Abort(.unauthorized)
+        }
+        req.session.authenticate(user)
+        return req.redirect(to: "/")
+    }
+    
+    func logout(req: Request) throws -> Response {
+        req.auth.logout(UserModel.self)
+        req.session.unauthenticate(UserModel.self)
+        return req.redirect(to: "/")
+    } 
+}
