@@ -8,6 +8,7 @@
 import Foundation
 import Fluent
 
+// 数据迁移执行命令：swift run App migrate
 struct BlogMigration_v1_0_0: Migration {
     private func uncategorizedPosts(for category: BlogCategoryModel) -> [BlogPostModel] {
             [
@@ -79,9 +80,7 @@ struct BlogMigration_v1_0_0: Migration {
                 let islandsCategory = BlogCategoryModel(title: "Islands")
                 return [defaultCategory, islandsCategory].create(on: database)
                         .flatMap {
-                            print("flatmap")
                                 let posts = self.uncategorizedPosts(for: defaultCategory) + self.islandPosts(for: islandsCategory)
-                            print("posts数量：\(posts.count)")
                             return posts.create(on: database)
                         }
             } 
