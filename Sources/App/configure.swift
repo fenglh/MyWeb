@@ -22,11 +22,13 @@ public func configure(_ app: Application) async throws {
     let leafSource = ModularViewFiles(workingDirectory: workingDirectory, fileio: app.fileio)
     app.leaf.sources = LeafSources.singleSource(leafSource)
   
-    let routers: [RouteCollection] = [FrontendRouter(), BlogRouter()]
-    for router in routers {
-        try router.boot(routes: app.routes)
-    }
-    let modules: [Module] = [UserModule(), FrontendModule(), AdminModule(), BlogModule()]
+
+    let modules: [Module] = [
+        UserModule(),
+        FrontendModule(),
+        AdminModule(),
+        BlogModule()
+    ]
     for module in modules {
         try module.configure(app)
     }
