@@ -21,8 +21,7 @@ struct BlogRouter: RouteCollection {
             UserModelSessionAuthenticator(),
             UserModel.redirectMiddleware(path: "/")
         ])
-        let blog = protected.grouped("admin", "blog")
-        let posts = blog.grouped("posts")
+        let posts = protected.grouped("admin", "blog", "posts")
 
         posts.get(use: self.adminController.listView)
         posts.get("new", use: self.adminController.createView)
