@@ -15,8 +15,9 @@ struct AdminController {
             let title: String
             let header: String
             let message: String
+            let username: String
         }
-        let context = Context(title: "myPage - Admin", header: "Hi \(user.email)", message: "welcome to the CMS!")
+        let context = Context(title: "myPage - Admin", header: "Hi \(user.email)", message: "welcome to the CMS!", username: user.email)
         return req.view.render("Admin/Home", context)
     }
 }

@@ -8,6 +8,7 @@
 import Vapor
 import Fluent
 
+// swift run App migrate
 struct UserMigration_v1_0_0: Migration {
     private func users() -> [UserModel] {
         [
@@ -22,6 +23,7 @@ struct UserMigration_v1_0_0: Migration {
             .id()
             .field(UserModel.FieldKeys.email, .string, .required)
             .field(UserModel.FieldKeys.password, .string, .required)
+            .field(UserModel.FieldKeys.avatar, .string, .custom(""))
             .unique(on: UserModel.FieldKeys.email)
             .create(),
     ]) .flatMap {

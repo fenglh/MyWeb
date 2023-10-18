@@ -14,6 +14,7 @@ final class BlogPostModel: Model {
     struct FieldKeys {
         static var title: FieldKey { "title" }
         static var slug: FieldKey { "slug" }
+        static var imageKey: FieldKey { "image_key" }
         static var image: FieldKey { "image" }
         static var excerpt: FieldKey { "excerpt" }
         static var date: FieldKey { "date" }
@@ -24,6 +25,7 @@ final class BlogPostModel: Model {
     @ID() var id: UUID?
     @Field(key: FieldKeys.title) var title: String
     @Field(key: FieldKeys.slug) var slug: String
+    @Field(key: FieldKeys.imageKey) var imageKey: String?
     @Field(key: FieldKeys.image) var image: String
     @Field(key: FieldKeys.excerpt) var excerpt: String
     @Field(key: FieldKeys.date) var date: Date
@@ -32,11 +34,19 @@ final class BlogPostModel: Model {
 
     init() { }
     
-    init(id: UUID? = nil, title: String, slug: String, image: String, excerpt: String, date: Date, content: String, categoryId: UUID)
+    init(id: UUID? = nil,
+         title: String, slug: String,
+         imageKey: String? = nil,
+         image: String, 
+         excerpt: String,
+         date: Date,
+         content: String,
+         categoryId: UUID)
     {
         self.id = id
         self.title = title
         self.slug = slug
+        self.imageKey = imageKey
         self.image = image
         self.excerpt = excerpt
         self.date = date

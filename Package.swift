@@ -17,6 +17,12 @@ let package = Package(
         .package(url: "https://github.com/vapor/fluent.git", from: "4.8.0"),
         // 🪶 Fluent driver for SQLite.
         .package(url: "https://github.com/vapor/fluent-sqlite-driver.git", from: "4.0.0"),
+        
+        .package(url: "https://github.com/binarybirds/liquid.git", "1.0.2"..<"1.0.2"),
+        .package(url: "https://github.com/binarybirds/liquid-local-driver.git",  "1.0.2"..<"1.0.2"),
+        .package(url: "https://github.com/binarybirds/liquid-kit.git",  "1.0.2"..<"1.0.2"),
+        
+        
     ],
     targets: [
         .executableTarget(
@@ -26,6 +32,8 @@ let package = Package(
                 .product(name: "FluentSQLiteDriver", package: "fluent-sqlite-driver"),
                 .product(name: "Leaf", package: "leaf"),
                 .product(name: "Vapor", package: "vapor"),
+                .product(name: "Liquid", package: "liquid"),
+                .product(name: "LiquidLocalDriver", package: "liquid-local-driver"),
             ]
         ),
         .testTarget(name: "AppTests", dependencies: [
